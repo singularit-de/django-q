@@ -9,6 +9,7 @@ import uuid
 from datetime import datetime
 from multiprocessing import Event, Process, Value, current_process
 from time import sleep
+from zoneinfo import ZoneInfo
 
 # External
 import arrow
@@ -612,7 +613,7 @@ def scheduler(broker: Broker = None):
                     q_options["hook"] = s.hook
                 # set up the next run time
                 if s.schedule_type != s.ONCE:
-                    next_run = arrow.get(s.next_run)
+                    next_run = arrow.get(s.next_run.astimezone(ZoneInfo(Conf.TIME_ZONE)))
                     while True:
                         if s.schedule_type == s.MINUTES:
                             next_run = next_run.shift(minutes=+(s.minutes or 1))

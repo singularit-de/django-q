@@ -179,6 +179,9 @@ class Conf:
     # Optional attempt count. set to 0 for infinite attempts
     MAX_ATTEMPTS = conf.get("max_attempts", 0)
 
+    # Optional time zone. Defaults to Django timezone
+    TIME_ZONE = conf.get("time_zone", settings.TIME_ZONE)
+
     # OSX doesn't implement qsize because of missing sem_getvalue()
     try:
         QSIZE = Queue().qsize() == 0
