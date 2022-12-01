@@ -217,7 +217,7 @@ The following commands can be used to run the tests:
     venv/bin/pip install -r requirements.txt
 
     # Install test dependencies
-    venv/bin/pip install pytest pytest-django
+    venv/bin/pip install pytest pytest-django django-redis
 
     # Install django-q
     venv/bin/python setup.py develop

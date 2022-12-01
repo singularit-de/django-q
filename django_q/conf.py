@@ -243,7 +243,7 @@ if Conf.ERROR_REPORTER:
         # and instantiate an ErrorReporter using the provided config
         for name, conf in error_conf.items():
             for entry in pkg_resources.iter_entry_points(
-                    "djangoq.errorreporters", name
+                "djangoq.errorreporters", name
             ):
                 Reporter = entry.load()
                 reporters.append(Reporter(**conf))

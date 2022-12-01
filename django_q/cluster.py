@@ -13,6 +13,7 @@ from zoneinfo import ZoneInfo
 
 # External
 import arrow
+
 # Django
 from django import core, db
 from django.apps.registry import apps
@@ -121,10 +122,10 @@ class Cluster:
     @property
     def is_stopping(self) -> bool:
         return (
-                self.stop_event
-                and self.start_event
-                and self.start_event.is_set()
-                and self.stop_event.is_set()
+            self.stop_event
+            and self.start_event
+            and self.start_event.is_set()
+            and self.stop_event.is_set()
         )
 
     @property
@@ -134,13 +135,13 @@ class Cluster:
 
 class Sentinel:
     def __init__(
-            self,
-            stop_event,
-            start_event,
-            cluster_id,
-            broker=None,
-            timeout=Conf.TIMEOUT,
-            start=True,
+        self,
+        stop_event,
+        start_event,
+        cluster_id,
+        broker=None,
+        timeout=Conf.TIMEOUT,
+        start=True,
     ):
         # Make sure we catch signals for the pool
         signal.signal(signal.SIGINT, signal.SIG_IGN)
@@ -399,7 +400,7 @@ def monitor(result_queue: Queue, broker: Broker = None):
 
 
 def worker(
-        task_queue: Queue, result_queue: Queue, timer: Value, timeout: int = Conf.TIMEOUT
+    task_queue: Queue, result_queue: Queue, timer: Value, timeout: int = Conf.TIMEOUT
 ):
     """
     Takes a task from the task queue, tries to execute it and puts the result back in the result queue
@@ -490,8 +491,8 @@ def save_task(task, broker: Broker):
                 existing_task.save()
 
             if (
-                    Conf.MAX_ATTEMPTS > 0
-                    and existing_task.attempt_count >= Conf.MAX_ATTEMPTS
+                Conf.MAX_ATTEMPTS > 0
+                and existing_task.attempt_count >= Conf.MAX_ATTEMPTS
             ):
                 broker.acknowledge(task["ack_id"])
 
